@@ -1,70 +1,43 @@
-/* Creating FORM */
-var form = document.createElement('form');
-document.body.appendChild(form);
-form.name = "login";
-form.action = "google.com";
-form.id = "form";
-
-var formElements = [
-    {type:'text', name:"age", placeholder:"22"},
-    {type:'text', name:"username", placeholder:"user_name"},
-    {type:'text', name:"date", placeholder:"28/12/2016"},
-    {type:'submit', value:"Validate Me"}
+/* CREATING FORM */
+var elements = [
+    {element:'form', name:'login', action:"google.com", id:"form"},
+    {element:'input', type:'text', name:"age", placeholder:"22"},
+    {element:'input', type:'text', name:"username", placeholder:"user_name"},
+    {element:'input', type:'text', name:"date", placeholder:"28/12/2016"},
+    {element:'input', type:'submit', value:"Validate Me"}
 ];
-
-for (var i = 0; i < formElements.length; i++) { //select which element to create
-    var $input = document.createElement('input');
-    for (var key in formElements[i]) { //select all attributes which element contain
-        $input.setAttribute(key, formElements[i][key]);
+//select which element to create
+for (var i = 0; i < elements.length; i++) { 
+    var $newElement = document.createElement(elements[i].element);
+    //select all attributes which element contain
+    for (var key in elements[i]) { 
+    	//create form
+        if (elements[i].element == "form" && key == "element") {
+            document.body.appendChild($newElement);
+        }
+        $newElement.setAttribute(key, elements[i][key]);
     }
-    document.getElementsByTagName('form')[0].appendChild($input);
+    //create inputs
+    if (elements[i].element != "form") {
+        document.getElementById('form').appendChild($newElement);
+    }
 }
 
-
-    // input.type = formElements[i].type;
-    // input.name = formElements[i].name;
-    // input.placeholder = formElements[i].placeholder;
-    // input.value = formElements[i].value;
-
-
-
-// /* Add input names */
-// var inputName = ['age', 'username', 'date'];
-// for (var j = 0; j < 3; j++) {
-//     document.getElementsByTagName('input')[j].name = inputName[j];
-// }
-// /* Adding submit */
-// document.getElementsByTagName('input')[3].type = "submit";
-// var submitBtn = document.getElementsByTagName('input')[3];
-//     submitBtn.value = "Validate Me";
-
-
-
-
-
-
-
-
-
-
-
 /* VALIDATING FORM */
-document.getElementsByTagName('form')[0].addEventListener('submit', function validate(e) {
-    e.preventDefault();
-    //debugger;
-    var ageInput = document.getElementsByName('age')[0].value,
-        nameInput = document.getElementsByName('username')[0].value,
-        dateInput = document.getElementsByName('date')[0].value;
-        console.log(ageInput);
-        console.log(parseInt(ageInput));
-
-    if (ageInput <= 0 || ageInput != parseInt(ageInput)){ //@todo add space validation
-        alert('ageInput are not correct');
+document.getElementById('form').addEventListener('submit', function validate(e) {
+    //Validating Age input
+    if (!/^(0?[1-9]|[0-9][0-9])$/.test(this.age.value)) {
+        alert('Age are not correct');
+        e.preventDefault();
     }
-    // if (nameInput <= 0 && parseInt(ageInput) != ageInput){
-    //     alert('nameInput are not correct')
-    // }
-    // if (dateInput <= 0 && parseInt(ageInput) != ageInput){
-    //     alert('dateInput are not correct')
-    // }
+    //Validating Name input
+    if (!/^user_/.test(this.username.value)) {
+        alert('Name are not correct! \nName should start from "user_"')
+        e.preventDefault();
+    }
+    //Validating Date input
+    if (!/^(([0-2]0?[1-9]|[3][0-1]|[1][0])[/]([0]0?[1-9]|[1][0-2])[/]([1][9][0-9][0-9]|[2][0][0-1][0-9]))$/.test(this.date.value)) {
+        alert('Your date is invalid')
+        e.preventDefault();
+    }
 });
