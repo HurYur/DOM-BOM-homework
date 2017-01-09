@@ -1,0 +1,49 @@
+body{
+/*	background: url(spaceBg.jpg) repeat;*/
+	position: relative;
+	animation: 60s fly infinite linear;
+    height: 100vh;
+}
+@keyframes fly {
+	from { background-position: 0 0; }
+	to { background-position: -1500px 0; }
+}
+div#player {
+    width: 80px;
+    height: 50px;
+    background: url(rocket.png);
+    background-size: 100% 100%;	
+    transition: all 0.1s ease-out 0s;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+div#enemy{
+	width: 60px;
+	height: 45px;
+    background: url(alien.png);
+    background-size: 100% 100%;	
+    transition: all 0.5s ease-out 0s;
+    position: absolute;
+    top: 200px;
+    right: 0px;
+}
+div#enemyHealth{
+    margin: auto;
+    width: 300px;
+    text-align: center;
+    color: red;
+    font-size: 32px;
+    font-family: arial;
+}
+div#enemyHealth:before{
+    content: "ENEMY HEALTH:";
+    color: black;
+}
+div.fire{
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: red;
+	position: absolute;
+}
