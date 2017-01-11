@@ -75,7 +75,7 @@ function enemyMove() {
     $enemy.style.top = Math.floor(Math.random()*sreenSizeY) + 'px';
     if (enemyHealth > 0){
       //set how quick change enemy position
-      setTimeout(enemyMove, 4000); 
+      setTimeout(enemyMove, 4500); 
     }
     else{
       alert('Confratulation you win \n You made: ' + shootsMade + ' shoots to kill the enemy');
